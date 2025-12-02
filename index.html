@@ -12,7 +12,7 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
+    body {
       font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
       -webkit-font-smoothing: antialiased;
     }
@@ -20,15 +20,37 @@
       from { opacity: 0; transform: translateX(-20px); }
       to { opacity: 1; transform: translateX(0); }
     }
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+      .day-btn { padding: 12px 16px !important; min-width: 60px; }
+      .day-btn-icon { font-size: 20px !important; }
+      .day-btn-date { font-size: 13px !important; }
+      .timeline-time { min-width: 50px !important; font-size: 13px !important; }
+      .timeline-content { padding: 12px 14px !important; }
+      .timeline-event { font-size: 14px !important; }
+      .timeline-note { margin-left: 0 !important; }
+      .route-tag { padding: 6px 10px !important; font-size: 12px !important; }
+      .route-arrow { font-size: 14px !important; }
+      .stat-card { padding: 16px !important; }
+      .stat-value { font-size: 20px !important; }
+      .location-tag { padding: 6px 12px !important; font-size: 12px !important; }
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const { useState } = React;
+    const { useState, useEffect } = React;
 
     const YunnanTripMap = () => {
       const [activeDay, setActiveDay] = useState(0);
+      const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+      useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
 
       const days = [
         {
@@ -138,7 +160,7 @@
           minHeight: '100vh',
           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
           fontFamily: '"Noto Serif SC", "Songti SC", Georgia, serif',
-          padding: '40px 20px',
+          padding: isMobile ? '20px 12px' : '40px 20px',
           position: 'relative',
           overflow: 'hidden'
         }}>
@@ -164,10 +186,10 @@
 
           <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
             {/* Header */}
-            <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <div style={{ textAlign: 'center', marginBottom: isMobile ? '30px' : '50px' }}>
               <div style={{
-                fontSize: '14px',
-                letterSpacing: '8px',
+                fontSize: isMobile ? '11px' : '14px',
+                letterSpacing: isMobile ? '4px' : '8px',
                 color: '#94a3b8',
                 marginBottom: '15px',
                 textTransform: 'uppercase'
@@ -175,27 +197,27 @@
                 2025 Christmas Journey
               </div>
               <h1 style={{
-                fontSize: 'clamp(36px, 6vw, 64px)',
+                fontSize: isMobile ? '32px' : 'clamp(36px, 6vw, 64px)',
                 fontWeight: '300',
                 color: '#f8fafc',
                 margin: '0 0 15px 0',
-                letterSpacing: '12px',
+                letterSpacing: isMobile ? '6px' : '12px',
                 textShadow: '0 4px 30px rgba(74, 144, 164, 0.4)'
               }}>
                 云南秘境
               </h1>
               <div style={{
-                fontSize: '18px',
+                fontSize: isMobile ? '14px' : '18px',
                 color: '#cbd5e1',
-                letterSpacing: '4px'
+                letterSpacing: isMobile ? '2px' : '4px'
               }}>
                 丽江 · 玉龙雪山 · 香格里拉
               </div>
               <div style={{
-                width: '120px',
+                width: isMobile ? '80px' : '120px',
                 height: '2px',
                 background: 'linear-gradient(90deg, transparent, #4A90A4, transparent)',
-                margin: '25px auto 0'
+                margin: '20px auto 0'
               }} />
             </div>
 
@@ -204,26 +226,26 @@
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              gap: '8px',
-              marginBottom: '50px',
+              gap: isMobile ? '4px' : '8px',
+              marginBottom: isMobile ? '25px' : '50px',
               flexWrap: 'wrap',
-              padding: '0 20px'
+              padding: '0 10px'
             }}>
               {['深圳', '丽江', '玉龙雪山', '香格里拉', '巴拉格宗', '虎跳峡', '丽江', '深圳'].map((place, i) => (
                 <React.Fragment key={i}>
-                  <span style={{
-                    padding: '8px 16px',
+                  <span className="route-tag" style={{
+                    padding: isMobile ? '5px 8px' : '8px 16px',
                     background: i === 0 || i === 7 ? 'rgba(168, 85, 247, 0.2)' : 'rgba(74, 144, 164, 0.2)',
                     borderRadius: '20px',
                     color: '#e2e8f0',
-                    fontSize: '14px',
+                    fontSize: isMobile ? '11px' : '14px',
                     border: `1px solid ${i === 0 || i === 7 ? 'rgba(168, 85, 247, 0.3)' : 'rgba(74, 144, 164, 0.3)'}`,
                     whiteSpace: 'nowrap'
                   }}>
                     {place}
                   </span>
                   {i < 7 && (
-                    <span style={{ color: '#4A90A4', fontSize: '20px' }}>→</span>
+                    <span className="route-arrow" style={{ color: '#4A90A4', fontSize: isMobile ? '12px' : '20px' }}>→</span>
                   )}
                 </React.Fragment>
               ))}
@@ -233,43 +255,46 @@
             <div style={{
               display: 'flex',
               justifyContent: 'center',
-              gap: '12px',
-              marginBottom: '40px',
-              flexWrap: 'wrap'
+              gap: isMobile ? '6px' : '12px',
+              marginBottom: isMobile ? '25px' : '40px',
+              flexWrap: 'wrap',
+              padding: isMobile ? '0 5px' : '0'
             }}>
               {days.map((day, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveDay(index)}
+                  className="day-btn"
                   style={{
-                    padding: '16px 24px',
-                    background: activeDay === index 
+                    padding: isMobile ? '10px 12px' : '16px 24px',
+                    background: activeDay === index
                       ? `linear-gradient(135deg, ${day.color}, ${day.color}dd)`
                       : 'rgba(30, 41, 59, 0.8)',
-                    border: activeDay === index 
+                    border: activeDay === index
                       ? 'none'
                       : '1px solid rgba(148, 163, 184, 0.2)',
-                    borderRadius: '16px',
+                    borderRadius: isMobile ? '12px' : '16px',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
                     transform: activeDay === index ? 'scale(1.05)' : 'scale(1)',
-                    boxShadow: activeDay === index 
+                    boxShadow: activeDay === index
                       ? `0 10px 40px ${day.color}40`
-                      : '0 4px 15px rgba(0,0,0,0.2)'
+                      : '0 4px 15px rgba(0,0,0,0.2)',
+                    minWidth: isMobile ? '58px' : 'auto'
                   }}
                 >
-                  <div style={{ fontSize: '24px', marginBottom: '8px' }}>{day.icon}</div>
-                  <div style={{ 
-                    color: '#f8fafc', 
-                    fontSize: '16px', 
+                  <div className="day-btn-icon" style={{ fontSize: isMobile ? '18px' : '24px', marginBottom: isMobile ? '4px' : '8px' }}>{day.icon}</div>
+                  <div className="day-btn-date" style={{
+                    color: '#f8fafc',
+                    fontSize: isMobile ? '12px' : '16px',
                     fontWeight: '500',
-                    marginBottom: '4px'
+                    marginBottom: '2px'
                   }}>
-                    {day.date}
+                    {isMobile ? day.date.replace('12月', '').replace('日', '') : day.date}
                   </div>
-                  <div style={{ 
-                    color: activeDay === index ? '#e2e8f0' : '#94a3b8', 
-                    fontSize: '12px' 
+                  <div style={{
+                    color: activeDay === index ? '#e2e8f0' : '#94a3b8',
+                    fontSize: isMobile ? '10px' : '12px'
                   }}>
                     {day.weekday}
                   </div>
@@ -281,8 +306,8 @@
             <div style={{
               background: 'rgba(30, 41, 59, 0.6)',
               backdropFilter: 'blur(20px)',
-              borderRadius: '24px',
-              padding: '40px',
+              borderRadius: isMobile ? '16px' : '24px',
+              padding: isMobile ? '16px' : '40px',
               border: '1px solid rgba(148, 163, 184, 0.1)',
               boxShadow: '0 25px 50px rgba(0,0,0,0.3)'
             }}>
@@ -291,31 +316,31 @@
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginBottom: '35px',
+                marginBottom: isMobile ? '20px' : '35px',
                 flexWrap: 'wrap',
-                gap: '20px'
+                gap: isMobile ? '12px' : '20px'
               }}>
                 <div>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '15px',
-                    marginBottom: '10px'
+                    gap: isMobile ? '10px' : '15px',
+                    marginBottom: '8px'
                   }}>
-                    <span style={{ fontSize: '40px' }}>{days[activeDay].icon}</span>
+                    <span style={{ fontSize: isMobile ? '28px' : '40px' }}>{days[activeDay].icon}</span>
                     <h2 style={{
                       margin: 0,
-                      fontSize: '32px',
+                      fontSize: isMobile ? '20px' : '32px',
                       fontWeight: '400',
                       color: '#f8fafc',
-                      letterSpacing: '2px'
+                      letterSpacing: isMobile ? '1px' : '2px'
                     }}>
                       {days[activeDay].title}
                     </h2>
                   </div>
                   <div style={{
                     color: '#94a3b8',
-                    fontSize: '16px',
+                    fontSize: isMobile ? '13px' : '16px',
                     letterSpacing: '1px'
                   }}>
                     {days[activeDay].date} {days[activeDay].weekday}
@@ -323,16 +348,16 @@
                 </div>
                 <div style={{
                   display: 'flex',
-                  gap: '10px',
+                  gap: isMobile ? '6px' : '10px',
                   flexWrap: 'wrap'
                 }}>
                   {days[activeDay].locations.map((loc, i) => (
-                    <span key={i} style={{
-                      padding: '10px 20px',
+                    <span key={i} className="location-tag" style={{
+                      padding: isMobile ? '6px 10px' : '10px 20px',
                       background: `${days[activeDay].color}30`,
                       borderRadius: '25px',
                       color: '#e2e8f0',
-                      fontSize: '14px',
+                      fontSize: isMobile ? '11px' : '14px',
                       border: `1px solid ${days[activeDay].color}50`
                     }}>
                       📍 {loc}
@@ -343,16 +368,18 @@
 
               {/* Timeline */}
               <div style={{ position: 'relative' }}>
-                {/* Vertical line */}
-                <div style={{
-                  position: 'absolute',
-                  left: '85px',
-                  top: '20px',
-                  bottom: '20px',
-                  width: '2px',
-                  background: `linear-gradient(to bottom, ${days[activeDay].color}60, transparent)`,
-                  borderRadius: '2px'
-                }} />
+                {/* Vertical line - hidden on mobile */}
+                {!isMobile && (
+                  <div style={{
+                    position: 'absolute',
+                    left: '85px',
+                    top: '20px',
+                    bottom: '20px',
+                    width: '2px',
+                    background: `linear-gradient(to bottom, ${days[activeDay].color}60, transparent)`,
+                    borderRadius: '2px'
+                  }} />
+                )}
 
                 {days[activeDay].schedule.map((item, index) => (
                   <div
@@ -360,67 +387,68 @@
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
-                      gap: '25px',
-                      marginBottom: '25px',
+                      gap: isMobile ? '10px' : '25px',
+                      marginBottom: isMobile ? '12px' : '25px',
                       position: 'relative',
                       animation: `fadeSlide 0.5s ease ${index * 0.1}s both`
                     }}
                   >
                     {/* Time */}
-                    <div style={{
-                      minWidth: '65px',
+                    <div className="timeline-time" style={{
+                      minWidth: isMobile ? '45px' : '65px',
                       textAlign: 'right',
                       color: '#94a3b8',
-                      fontSize: '15px',
+                      fontSize: isMobile ? '12px' : '15px',
                       fontFamily: 'SF Mono, Monaco, monospace',
-                      paddingTop: '12px'
+                      paddingTop: isMobile ? '10px' : '12px'
                     }}>
                       {item.time}
                     </div>
 
                     {/* Dot */}
                     <div style={{
-                      width: '14px',
-                      height: '14px',
+                      width: isMobile ? '10px' : '14px',
+                      height: isMobile ? '10px' : '14px',
                       borderRadius: '50%',
                       background: getTypeColor(item.type),
-                      border: '3px solid #1e293b',
+                      border: isMobile ? '2px solid #1e293b' : '3px solid #1e293b',
                       boxShadow: `0 0 15px ${getTypeColor(item.type)}60`,
-                      marginTop: '14px',
+                      marginTop: isMobile ? '11px' : '14px',
                       flexShrink: 0,
                       zIndex: 1
                     }} />
 
                     {/* Content */}
-                    <div style={{
+                    <div className="timeline-content" style={{
                       flex: 1,
                       background: 'rgba(51, 65, 85, 0.4)',
-                      borderRadius: '16px',
-                      padding: '16px 20px',
+                      borderRadius: isMobile ? '12px' : '16px',
+                      padding: isMobile ? '10px 12px' : '16px 20px',
                       borderLeft: `3px solid ${getTypeColor(item.type)}`,
                       transition: 'all 0.3s ease'
                     }}>
                       <div style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '12px',
-                        marginBottom: item.note ? '8px' : '0'
+                        gap: isMobile ? '8px' : '12px',
+                        marginBottom: item.note ? '6px' : '0',
+                        flexWrap: isMobile ? 'wrap' : 'nowrap'
                       }}>
-                        <span style={{ fontSize: '22px' }}>{item.icon}</span>
-                        <span style={{
+                        <span style={{ fontSize: isMobile ? '16px' : '22px' }}>{item.icon}</span>
+                        <span className="timeline-event" style={{
                           color: '#f1f5f9',
-                          fontSize: '16px',
+                          fontSize: isMobile ? '13px' : '16px',
                           fontWeight: '400'
                         }}>
                           {item.event}
                         </span>
                         {item.type === 'highlight' && (
                           <span style={{
-                            padding: '3px 10px',
+                            padding: isMobile ? '2px 6px' : '3px 10px',
                             background: 'linear-gradient(135deg, #ef4444, #f97316)',
                             borderRadius: '12px',
                             color: '#fff',
-                            fontSize: '11px',
+                            fontSize: isMobile ? '9px' : '11px',
                             fontWeight: '500',
                             letterSpacing: '1px'
                           }}>
@@ -429,10 +457,10 @@
                         )}
                       </div>
                       {item.note && (
-                        <div style={{
+                        <div className="timeline-note" style={{
                           color: '#94a3b8',
-                          fontSize: '13px',
-                          marginLeft: '34px',
+                          fontSize: isMobile ? '11px' : '13px',
+                          marginLeft: isMobile ? '24px' : '34px',
                           fontStyle: 'italic'
                         }}>
                           {item.note}
@@ -447,9 +475,9 @@
             {/* Footer Stats */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              gap: '20px',
-              marginTop: '40px'
+              gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: isMobile ? '10px' : '20px',
+              marginTop: isMobile ? '25px' : '40px'
             }}>
               {[
                 { label: '总天数', value: '5天', icon: '📅' },
@@ -457,24 +485,24 @@
                 { label: '最高海拔', value: '4680m', icon: '🏔️' },
                 { label: '航班', value: '2程', icon: '✈️' }
               ].map((stat, i) => (
-                <div key={i} style={{
+                <div key={i} className="stat-card" style={{
                   background: 'rgba(30, 41, 59, 0.5)',
                   backdropFilter: 'blur(10px)',
-                  borderRadius: '16px',
-                  padding: '24px',
+                  borderRadius: isMobile ? '12px' : '16px',
+                  padding: isMobile ? '14px' : '24px',
                   textAlign: 'center',
                   border: '1px solid rgba(148, 163, 184, 0.1)'
                 }}>
-                  <div style={{ fontSize: '28px', marginBottom: '10px' }}>{stat.icon}</div>
-                  <div style={{ 
-                    color: '#f8fafc', 
-                    fontSize: '24px', 
+                  <div style={{ fontSize: isMobile ? '22px' : '28px', marginBottom: isMobile ? '6px' : '10px' }}>{stat.icon}</div>
+                  <div className="stat-value" style={{
+                    color: '#f8fafc',
+                    fontSize: isMobile ? '18px' : '24px',
                     fontWeight: '500',
-                    marginBottom: '5px'
+                    marginBottom: '4px'
                   }}>
                     {stat.value}
                   </div>
-                  <div style={{ color: '#94a3b8', fontSize: '13px', letterSpacing: '1px' }}>
+                  <div style={{ color: '#94a3b8', fontSize: isMobile ? '11px' : '13px', letterSpacing: '1px' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -485,8 +513,8 @@
             <div style={{
               display: 'flex',
               justifyContent: 'center',
-              gap: '25px',
-              marginTop: '30px',
+              gap: isMobile ? '12px' : '25px',
+              marginTop: isMobile ? '20px' : '30px',
               flexWrap: 'wrap'
             }}>
               {[
@@ -499,15 +527,15 @@
                 <div key={i} style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '6px'
                 }}>
                   <div style={{
-                    width: '10px',
-                    height: '10px',
+                    width: isMobile ? '8px' : '10px',
+                    height: isMobile ? '8px' : '10px',
                     borderRadius: '50%',
                     background: getTypeColor(item.type)
                   }} />
-                  <span style={{ color: '#94a3b8', fontSize: '13px' }}>{item.label}</span>
+                  <span style={{ color: '#94a3b8', fontSize: isMobile ? '11px' : '13px' }}>{item.label}</span>
                 </div>
               ))}
             </div>
