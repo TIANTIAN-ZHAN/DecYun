@@ -63,12 +63,12 @@
           schedule: [
             { time: '07:10', event: '深圳宝安T3起飞', icon: '🛫', type: 'transport', note: 'CZ8581' },
             { time: '10:15', event: '抵达丽江三义机场', icon: '🛬', type: 'transport', note: 'CZ8581' },
-            { time: '11:00', event: '机场→丽江古城开臣璞錦酒店', icon: '🚗', type: 'transport', note: '约35-45分钟', nav: { from: '丽江三义机场', to: '丽江古城开臣璞錦酒店', toLng: 100.2339, toLat: 26.8721 } },
+            { time: '11:00', event: '机场→丽江古城开臣璞錦酒店', icon: '🚗', type: 'transport', note: '28km · 约40分钟', nav: { to: '丽江古城开臣璞錦酒店', toLng: 100.2339, toLat: 26.8721 } },
             { time: '13:00', event: '午餐', icon: '🍜', type: 'food' },
             { time: '15:00', event: '丽江古城漫步', icon: '🏛️', type: 'activity', note: '四方街→大石桥→木府→狮子山万古楼' },
-            { time: '18:00', event: '出发束河古镇', icon: '🚗', type: 'transport', note: '15分钟' },
-            { time: '19:00', event: '荒野之国晚餐', icon: '🍽️', type: 'food', note: '束河雪山艺术小镇' },
-            { time: '23:00', event: '返回古城酒店', icon: '🏨', type: 'rest', note: '车程20分钟' },
+            { time: '18:00', event: '出发束河古镇', icon: '🚗', type: 'transport', note: '6km · 约15分钟', nav: { to: '束河古镇', toLng: 100.2073, toLat: 26.9163 } },
+            { time: '19:00', event: '荒野之国晚餐', icon: '🍽️', type: 'food', note: '束河雪山艺术小镇', nav: { to: '荒野之国餐厅', toLng: 100.1923, toLat: 26.9456 } },
+            { time: '23:00', event: '返回古城酒店', icon: '🚗', type: 'transport', note: '6km · 约20分钟', nav: { to: '丽江古城开臣璞錦酒店', toLng: 100.2339, toLat: 26.8721 } },
           ]
         },
         {
@@ -79,13 +79,13 @@
           icon: '🏔️',
           locations: ['玉龙雪山', '蓝月谷', '丽江古城'],
           schedule: [
-            { time: '05:50', event: '酒店出发', icon: '🌅', type: 'transport' },
-            { time: '07:30', event: '抵达雪山景区换乘中心', icon: '🎿', type: 'activity', note: '车程50-60分钟' },
+            { time: '05:50', event: '酒店出发', icon: '🌅', type: 'transport', note: '35km · 约50-60分钟', nav: { to: '玉龙雪山景区换乘中心', toLng: 100.1867, toLat: 27.0961 } },
+            { time: '07:30', event: '抵达雪山景区换乘中心', icon: '🎿', type: 'activity', note: '🅿️ 停车约￥20-30' },
             { time: '07:40', event: '冰川公园大索道 + 日照金山', icon: '🚡', type: 'highlight', note: '登顶4680m' },
             { time: '09:00', event: '4680m平台+栈道自由活动', icon: '🥾', type: 'activity' },
-            { time: '11:00', event: '下山→蓝月谷', icon: '💧', type: 'activity' },
+            { time: '11:00', event: '下山→蓝月谷', icon: '💧', type: 'activity', note: '🚌 景区大巴' },
             { time: '13:00', event: '午餐', icon: '🍜', type: 'food' },
-            { time: '16:00', event: '返回丽江古城', icon: '🚗', type: 'transport', note: '约1小时' },
+            { time: '16:00', event: '返回丽江古城', icon: '🚗', type: 'transport', note: '35km · 约1小时', nav: { to: '丽江古城开臣璞錦酒店', toLng: 100.2339, toLat: 26.8721 } },
             { time: '18:00', event: '古城圣诞夜自由晚餐', icon: '🎄', type: 'food', note: '酒吧街' },
           ]
         },
@@ -98,13 +98,13 @@
           locations: ['普达措', '松赞林寺', '纳帕海'],
           schedule: [
             { time: '08:30', event: '酒店退房+早餐', icon: '🥐', type: 'food' },
-            { time: '09:00', event: '出发香格里拉', icon: '🚗', type: 'transport', note: '约2.5小时' },
+            { time: '09:00', event: '出发香格里拉', icon: '🚗', type: 'transport', note: '180km · 约2.5小时', nav: { to: '香格里拉大酒店', toLng: 99.7063, toLat: 27.8253 } },
             { time: '10:00', event: '普达措国家公园', icon: '🏞️', type: 'highlight', note: '属都湖→弥里塘→碧塔海木栈道' },
-            { time: '12:00', event: '香格里拉大酒店入住', icon: '🏨', type: 'rest' },
+            { time: '12:00', event: '香格里拉大酒店入住', icon: '🏨', type: 'rest', nav: { to: '香格里拉大酒店', toLng: 99.7063, toLat: 27.8253 } },
             { time: '13:00', event: '午餐', icon: '🍜', type: 'food' },
-            { time: '15:00', event: '松赞林寺', icon: '🛕', type: 'activity', note: '小布达拉宫' },
-            { time: '18:00', event: '纳帕海 + 大经幡', icon: '🐎', type: 'activity' },
-            { time: '20:00', event: '返回香格里拉市区', icon: '🚗', type: 'transport' },
+            { time: '15:00', event: '松赞林寺', icon: '🛕', type: 'activity', note: '5km · 约15分钟 · 🅿️￥10', nav: { to: '松赞林寺', toLng: 99.7122, toLat: 27.8582 } },
+            { time: '18:00', event: '纳帕海 + 大经幡', icon: '🐎', type: 'activity', note: '8km+10km · 路边可停车', nav: { to: '纳帕海', toLng: 99.6261, toLat: 27.8791 } },
+            { time: '20:00', event: '返回香格里拉市区', icon: '🚗', type: 'transport', note: '15km · 约30分钟', nav: { to: '香格里拉大酒店', toLng: 99.7063, toLat: 27.8253 } },
           ]
         },
         {
@@ -116,12 +116,12 @@
           locations: ['普达措', '巴拉格宗'],
           schedule: [
             { time: '07:00', event: '早餐', icon: '🥐', type: 'food' },
-            { time: '08:00', event: '出发普达措国家公园', icon: '🚗', type: 'transport', note: '30-40分钟' },
-            { time: '09:00', event: '游览普达措', icon: '🏞️', type: 'activity' },
+            { time: '08:00', event: '出发普达措国家公园', icon: '🚗', type: 'transport', note: '22km · 约30-40分钟', nav: { to: '普达措国家公园', toLng: 99.9571, toLat: 27.8901 } },
+            { time: '09:00', event: '游览普达措', icon: '🏞️', type: 'activity', note: '🅿️ 景区免费停车' },
             { time: '13:00', event: '午餐', icon: '🍜', type: 'food' },
-            { time: '15:00', event: '出发巴拉格宗', icon: '🚗', type: 'transport', note: '约2小时' },
-            { time: '17:00', event: '巴拉格宗景区', icon: '🏔️', type: 'highlight', note: '大峡谷+玻璃栈道+千年菩提树+香巴拉佛塔' },
-            { time: '20:00', event: '返回香格里拉市区', icon: '🚗', type: 'transport', note: '约2小时' },
+            { time: '15:00', event: '出发巴拉格宗', icon: '🚗', type: 'transport', note: '80km · 约2小时', nav: { to: '巴拉格宗景区', toLng: 99.2981, toLat: 28.2121 } },
+            { time: '17:00', event: '巴拉格宗景区', icon: '🏔️', type: 'highlight', note: '大峡谷+玻璃栈道+千年菩提树+香巴拉佛塔 · 🅿️免费' },
+            { time: '20:00', event: '返回香格里拉市区', icon: '🚗', type: 'transport', note: '80km · 约2小时', nav: { to: '香格里拉大酒店', toLng: 99.7063, toLat: 27.8253 } },
           ]
         },
         {
@@ -133,11 +133,11 @@
           locations: ['虎跳峡', '丽江', '深圳'],
           schedule: [
             { time: '07:00', event: '酒店退房+早餐', icon: '🥐', type: 'food' },
-            { time: '08:00', event: '出发返回丽江', icon: '🚗', type: 'transport', note: '约2.5小时' },
+            { time: '08:00', event: '出发虎跳峡', icon: '🚗', type: 'transport', note: '96km · 约1.5小时', nav: { to: '虎跳峡景区', toLng: 100.1091, toLat: 27.1912 } },
             { time: '10:00', event: '虎跳峡', icon: '🌊', type: 'highlight', note: 'Tiger Leaping Gorge' },
-            { time: '13:00', event: '午餐', icon: '🍜', type: 'food' },
-            { time: '14:00', event: '丽江古城自由活动', icon: '🚶', type: 'activity' },
-            { time: '20:00', event: '古城→丽江机场', icon: '🚗', type: 'transport', note: '约40分钟' },
+            { time: '12:00', event: '前往丽江古城', icon: '🚗', type: 'transport', note: '80km · 约1.5-2小时', nav: { to: '丽江古城', toLng: 100.2339, toLat: 26.8721 } },
+            { time: '14:00', event: '午餐+古城自由活动', icon: '🚶', type: 'activity' },
+            { time: '20:00', event: '古城→丽江机场（还车）', icon: '🚗', type: 'transport', note: '28km · 约40分钟', nav: { to: '丽江三义机场', toLng: 100.2461, toLat: 26.6801 } },
             { time: '21:55', event: '丽江起飞', icon: '🛫', type: 'transport', note: 'H01946' },
             { time: '00:20', event: '抵达深圳宝安T3', icon: '🛬', type: 'transport', note: 'H01946 次日凌晨' },
           ]
@@ -566,6 +566,61 @@
                   <span style={{ color: '#94a3b8', fontSize: isMobile ? '11px' : '13px' }}>{item.label}</span>
                 </div>
               ))}
+            </div>
+
+            {/* 自驾须知 */}
+            <div style={{
+              marginTop: isMobile ? '25px' : '40px',
+              background: 'rgba(30, 41, 59, 0.5)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: isMobile ? '12px' : '16px',
+              padding: isMobile ? '16px' : '24px',
+              border: '1px solid rgba(148, 163, 184, 0.1)'
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                marginBottom: isMobile ? '12px' : '16px'
+              }}>
+                <span style={{ fontSize: isMobile ? '20px' : '24px' }}>🚗</span>
+                <h3 style={{
+                  margin: 0,
+                  color: '#f8fafc',
+                  fontSize: isMobile ? '16px' : '18px',
+                  fontWeight: '500'
+                }}>自驾须知</h3>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                gap: isMobile ? '10px' : '16px'
+              }}>
+                <div style={{
+                  background: 'rgba(59, 130, 246, 0.1)',
+                  borderRadius: '10px',
+                  padding: isMobile ? '12px' : '16px',
+                  border: '1px solid rgba(59, 130, 246, 0.2)'
+                }}>
+                  <div style={{ color: '#60a5fa', fontSize: isMobile ? '12px' : '14px', marginBottom: '6px', fontWeight: '500' }}>📍 租还车地点</div>
+                  <div style={{ color: '#e2e8f0', fontSize: isMobile ? '13px' : '15px' }}>丽江三义机场</div>
+                  <div style={{ color: '#94a3b8', fontSize: isMobile ? '11px' : '12px', marginTop: '4px' }}>24日取车 → 28日还车</div>
+                </div>
+                <div style={{
+                  background: 'rgba(245, 158, 11, 0.1)',
+                  borderRadius: '10px',
+                  padding: isMobile ? '12px' : '16px',
+                  border: '1px solid rgba(245, 158, 11, 0.2)'
+                }}>
+                  <div style={{ color: '#fbbf24', fontSize: isMobile ? '12px' : '14px', marginBottom: '6px', fontWeight: '500' }}>🅿️ 停车费参考</div>
+                  <div style={{ color: '#e2e8f0', fontSize: isMobile ? '12px' : '13px', lineHeight: '1.6' }}>
+                    古城外停车场 ￥10-20/次<br/>
+                    玉龙雪山 ￥20-30<br/>
+                    松赞林寺 ￥10<br/>
+                    普达措/巴拉格宗 免费
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
