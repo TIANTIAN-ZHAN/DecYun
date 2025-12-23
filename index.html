@@ -59,6 +59,7 @@
           title: '深圳 → 丽江',
           color: '#2D5A7B',
           icon: '✈️',
+          weather: { condition: '晴', icon: '☀️', high: 16, low: -1, location: '丽江' },
           locations: ['深圳', '丽江古城'],
           schedule: [
             { time: '07:10', event: '深圳宝安T3起飞', icon: '🛫', type: 'transport', note: 'CZ8581' },
@@ -77,6 +78,7 @@
           title: '玉龙雪山',
           color: '#4A90A4',
           icon: '🏔️',
+          weather: { condition: '晴', icon: '☀️', high: 14, low: -1, location: '丽江' },
           locations: ['玉龙雪山', '蓝月谷', '丽江古城'],
           schedule: [
             { time: '05:50', event: '酒店出发', icon: '🌅', type: 'transport', note: '35km · 约50-60分钟', nav: { to: '玉龙雪山景区换乘中心', toLng: 100.1867, toLat: 27.0961 } },
@@ -95,6 +97,7 @@
           title: '丽江 → 香格里拉',
           color: '#5B8C5A',
           icon: '🌲',
+          weather: { condition: '多云转晴', icon: '⛅', high: 9, low: -9, location: '香格里拉' },
           locations: ['普达措', '松赞林寺', '纳帕海'],
           schedule: [
             { time: '08:30', event: '酒店退房+早餐', icon: '🥐', type: 'food' },
@@ -113,6 +116,7 @@
           title: '巴拉格宗',
           color: '#8B5A2B',
           icon: '⛰️',
+          weather: { condition: '晴', icon: '☀️', high: 10, low: -9, location: '香格里拉' },
           locations: ['普达措', '巴拉格宗'],
           schedule: [
             { time: '07:00', event: '早餐', icon: '🥐', type: 'food' },
@@ -130,6 +134,7 @@
           title: '香格里拉 → 深圳',
           color: '#6B4E71',
           icon: '🏠',
+          weather: { condition: '晴转多云', icon: '🌤️', high: 11, low: -9, location: '香格里拉' },
           locations: ['虎跳峡', '丽江', '深圳'],
           schedule: [
             { time: '07:00', event: '酒店退房+早餐', icon: '🥐', type: 'food' },
@@ -352,24 +357,78 @@
                     {days[activeDay].date} {days[activeDay].weekday}
                   </div>
                 </div>
+
+                {/* Weather Card */}
                 <div style={{
+                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1))',
+                  borderRadius: isMobile ? '12px' : '16px',
+                  padding: isMobile ? '12px 16px' : '16px 24px',
+                  border: '1px solid rgba(139, 92, 246, 0.2)',
                   display: 'flex',
-                  gap: isMobile ? '6px' : '10px',
-                  flexWrap: 'wrap'
+                  alignItems: 'center',
+                  gap: isMobile ? '12px' : '20px',
+                  minWidth: isMobile ? 'auto' : '200px'
                 }}>
-                  {days[activeDay].locations.map((loc, i) => (
-                    <span key={i} className="location-tag" style={{
-                      padding: isMobile ? '6px 10px' : '10px 20px',
-                      background: `${days[activeDay].color}30`,
-                      borderRadius: '25px',
-                      color: '#e2e8f0',
-                      fontSize: isMobile ? '11px' : '14px',
-                      border: `1px solid ${days[activeDay].color}50`
+                  <div style={{ fontSize: isMobile ? '32px' : '42px' }}>
+                    {days[activeDay].weather.icon}
+                  </div>
+                  <div>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '4px',
+                      marginBottom: '4px'
                     }}>
-                      📍 {loc}
-                    </span>
-                  ))}
+                      <span style={{
+                        fontSize: isMobile ? '22px' : '28px',
+                        fontWeight: '500',
+                        color: '#f8fafc'
+                      }}>
+                        {days[activeDay].weather.high}°
+                      </span>
+                      <span style={{
+                        fontSize: isMobile ? '14px' : '16px',
+                        color: '#94a3b8'
+                      }}>
+                        / {days[activeDay].weather.low}°C
+                      </span>
+                    </div>
+                    <div style={{
+                      color: '#cbd5e1',
+                      fontSize: isMobile ? '12px' : '14px'
+                    }}>
+                      {days[activeDay].weather.condition}
+                    </div>
+                    <div style={{
+                      color: '#64748b',
+                      fontSize: isMobile ? '10px' : '12px',
+                      marginTop: '2px'
+                    }}>
+                      📍 {days[activeDay].weather.location}
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              {/* Location Tags */}
+              <div style={{
+                display: 'flex',
+                gap: isMobile ? '6px' : '10px',
+                flexWrap: 'wrap',
+                marginBottom: isMobile ? '16px' : '24px'
+              }}>
+                {days[activeDay].locations.map((loc, i) => (
+                  <span key={i} className="location-tag" style={{
+                    padding: isMobile ? '6px 10px' : '10px 20px',
+                    background: `${days[activeDay].color}30`,
+                    borderRadius: '25px',
+                    color: '#e2e8f0',
+                    fontSize: isMobile ? '11px' : '14px',
+                    border: `1px solid ${days[activeDay].color}50`
+                  }}>
+                    📍 {loc}
+                  </span>
+                ))}
               </div>
 
               {/* Timeline */}
